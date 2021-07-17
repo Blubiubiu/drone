@@ -13,7 +13,7 @@ steps:
   - name: public-online   
     image: plugins/docker 
     commands:
-      - 'docker login --username=lsy272631750 -p cptbtptp123 hub.docker.com/'
+      - 'docker login --username=lsy272631750 --password=cptbtptp123'
       - 'docker build --rm -t test_docker .'
       - 'docker tag test_docker lsy272631750/test'
       - 'docker push lsy272631750/test:test_docker'
