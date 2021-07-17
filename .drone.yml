@@ -11,12 +11,7 @@ steps:
       branch: master
   - name: public-online   
     image: plugins/docker 
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock 
     commands:
-      - name: docker
-    image: plugins/docker
-    settings:
       - 'docker login --username=lsy272631750 -p cptbtptp123 hub.docker.com/'
       - 'docker build --rm -t test_docker .'
       - 'docker tag test_docker lsy272631750/test'
