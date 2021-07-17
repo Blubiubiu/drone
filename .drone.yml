@@ -5,8 +5,7 @@ steps:
   - name: build-master
     image: 'node:10.6.0'
     commands:
-      - 'npm --registry https://registry.npm.taobao.org install express'
-      - 'cnpm install'
+      - 'npm install'
       - 'npm run build'
     when:
       branch: master
