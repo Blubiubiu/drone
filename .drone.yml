@@ -9,17 +9,20 @@ steps:
       - 'npm run build'
     when:
       branch: master
-  # - name: public-online   
-  #   image: plugins/docker 
-  #   volumes:
-  #     - /var/run/docker.sock:/var/run/docker.sock 
-  #   commands:
-  #     - 'docker login --username=hesouli -p Cptbtptp123 registry.cn-beijing.aliyuncs.com'
-      # - 'docker build --rm -t docker_test_02 .'
-      # - 'docker tag docker_test_02 registry.cn-beijing.aliyuncs.com/my_docker_test_01/docker_test_02'
-      # - 'docker push registry.cn-beijing.aliyuncs.com/my_docker_test_01/docker_test_02'
-    # when: 
-    #   branch: master  
+  - name: public-online   
+    image: plugins/docker 
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock 
+    commands:
+      - name: docker
+    image: plugins/docker
+    settings:
+      - 'docker login --username=lsy272631750 -p cptbtptp123 hub.docker.com/'
+      - 'docker build --rm -t test_docker .'
+      - 'docker tag test_docker lsy272631750/test'
+      - 'docker push lsy272631750/test:test_docker'
+    when: 
+      branch: master  
   # rancher-online:
   #   image: peloton/drone-rancher
   #   url: 'https://rancher.11vx.cn'
