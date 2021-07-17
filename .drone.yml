@@ -2,15 +2,17 @@ kind: pipeline
 type: docker
 name: api
 steps:
-  - name: build-master
-    image: 'node:10.6.0'
-    commands:
-      - 'npm install'
-      - 'npm run build'
-    when:
-      branch: master
+  # - name: build-master
+  #   image: 'node:10.6.0'
+  #   commands:
+  #     - 'npm install'
+  #     - 'npm run build'
+  #   when:
+  #     branch: master
   - name: public-online   
     image: plugins/docker 
+    volume: 
+      /var/run/docker.sock:/var/run/docker.sock
     commands:
       - 'docker login --username=lsy272631750 --password=cptbtptp123'
       - 'docker build --rm -t test_docker .'
