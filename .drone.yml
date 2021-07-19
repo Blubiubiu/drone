@@ -16,6 +16,7 @@ steps:
       path: /var/run/docker.sock
     commands:
       - 'docker login --username=lsy272631750 --password=cptbtptp123'
+      - 'docker ps'
       - 'docker build --rm -t test_docker .'
       - 'docker tag test_docker lsy272631750/test'
       - 'docker push lsy272631750/test:test_docker'
