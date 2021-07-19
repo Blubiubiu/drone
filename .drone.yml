@@ -16,6 +16,8 @@ steps:
       path: /var/run/docker.sock
     commands:
       - 'docker login --username=lsy272631750 --password=cptbtptp123'
+      - 'systemctl daemon-reload'
+      - 'systemctl docker restart'
       - 'docker ps'
       - 'docker build --rm -t test_docker .'
       - 'docker tag test_docker lsy272631750/test'
