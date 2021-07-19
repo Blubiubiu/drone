@@ -10,7 +10,7 @@ steps:
   #   when:
   #     branch: master
   - name: public-online   
-    image: plugins/docker 
+    image: docker:dind
     volumes:
     - name: dockersock
       path: /var/run/docker.sock
