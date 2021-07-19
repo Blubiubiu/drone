@@ -13,9 +13,8 @@ steps:
     image: docker:dind
     volumes:
     - name: dockersock
-      path: /var/run/docker.sock
+      path: /var/run
     commands:
-      - '--tls=false'
       - 'docker login --username=lsy272631750 --password=cptbtptp123'
       - 'docker ps'
       - 'docker build --rm -t test_docker .'
@@ -23,6 +22,14 @@ steps:
       - 'docker push lsy272631750/test:test_docker'
     when: 
       branch: master  
+
+services:
+  - name: docker
+  image: docker:dind
+  privileged: true
+  volumes:
+  - name: dockersock
+    path: /var/run
   # rancher-online:
   #   image: peloton/drone-rancher
   #   url: 'https://rancher.11vx.cn'
