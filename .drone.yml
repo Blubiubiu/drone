@@ -10,11 +10,12 @@ steps:
   #   when:
   #     branch: master
   - name: public-online   
-    image: docker:latest
+    image: docker:dind
     volumes:
     - name: dockersock
       path: /var/run/docker.sock
     commands:
+      - '--tls=false'
       - 'docker login --username=lsy272631750 --password=cptbtptp123'
       - 'docker ps'
       - 'docker build --rm -t test_docker .'
