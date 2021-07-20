@@ -16,6 +16,7 @@ steps:
       path: /var/run
     commands:
       - 'sleep 5'
+      - 'docker --version'
       - 'docker login --username=lsy272631750 --password=cptbtptp123'
       - 'docker ps'
       - 'docker build --rm -t test_docker .'
