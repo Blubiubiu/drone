@@ -2,6 +2,19 @@ kind: pipeline
 type: docker
 name: api
 steps:
+- name: test
+  image: docker:dind
+  volumes:
+  - name: dockersock
+    path: /var/run/docker.sock
+  commands:
+  - docker ps -a
+
+volumes:
+- name: dockersock
+  host:
+    path: /var/run/docker.sock
+# steps:
   # - name: build-master
   #   image: 'node:10.6.0'
   #   commands:
@@ -9,26 +22,26 @@ steps:
   #     - 'npm run build'
   #   when:
   #     branch: master
-  - name: public-online   
-    image: plugins/docker
-    volumes:
-    - name: dockersock
-      path: /var/run/docker.sock
-    commands:
-      - 'sleep 5'
-      - 'docker --version'
-      - 'docker login --username=lsy272631750 --password=cptbtptp123'
-      - 'docker ps'
-      - 'docker build --rm -t test_docker .'
-      - 'docker tag test_docker lsy272631750/test'
-      - 'docker push lsy272631750/test:test_docker'
-    when: 
-      branch: master  
+#   - name: public-online   
+#     image: plugins/docker
+#     volumes:
+#     - name: dockersock
+#       path: /var/run/docker.sock
+#     commands:
+#       - 'sleep 5'
+#       - 'docker --version'
+#       - 'docker login --username=lsy272631750 --password=cptbtptp123'
+#       - 'docker ps'
+#       - 'docker build --rm -t test_docker .'
+#       - 'docker tag test_docker lsy272631750/test'
+#       - 'docker push lsy272631750/test:test_docker'
+#     when: 
+#       branch: master  
 
-volumes:
-  - name: dockersock
-    host:
-      path: /var/run/docker.sock
+# volumes:
+#   - name: dockersock
+#     host:
+#       path: /var/run/docker.sock
 # services:
 #   - name: docker
 #     image: docker:dind
