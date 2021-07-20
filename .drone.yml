@@ -11,7 +11,7 @@ steps:
   commands:
   - sleep 5 # give docker enough time to start
   - docker --version
-  - docker ps -a
+  - docker ps
 
 # services:
 # - name: docker
