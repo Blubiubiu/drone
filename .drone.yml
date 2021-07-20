@@ -1,4 +1,5 @@
 kind: pipeline
+type: docker
 name: default
 
 steps:
@@ -9,15 +10,16 @@ steps:
     path: /var/run
   commands:
   - sleep 5 # give docker enough time to start
+  - docker --version
   - docker ps -a
 
-# services:
-# - name: docker
-#   image: docker:dind
-#   privileged: true
-#   volumes:
-#   - name: dockersock
-#     path: /var/run
+services:
+- name: docker
+  image: docker:dind
+  privileged: true
+  volumes:
+  - name: dockersock
+    path: /var/run
 
 volumes:
 - name: dockersock
