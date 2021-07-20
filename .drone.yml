@@ -19,9 +19,9 @@ services:
   - name: dockersock
     path: /var/run
 
-volumes:
-- name: dockersock
-  temp: {}
+# volumes:
+# - name: dockersock
+#   temp: {}
 # steps:
   # - name: build-master
   #   image: 'node:10.6.0'
