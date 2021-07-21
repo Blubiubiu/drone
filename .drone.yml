@@ -12,6 +12,8 @@ steps:
   - sleep 5 # give docker enough time to start
   - docker --version
   - docker ps
+  when:
+    branch: master
   privileged: true
 
 # services:
