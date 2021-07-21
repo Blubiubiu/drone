@@ -14,7 +14,7 @@ steps:
   - docker ps
   when:
     branch: master
-  privileged: true
+  # privileged: true
 
 # services:
 # - name: docker
