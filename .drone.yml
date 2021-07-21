@@ -3,18 +3,32 @@ type: docker
 name: default
 
 steps:
-- name: test
-  image: docker:latest
-  volumes:
-  - name: dockersock
-    path: /var/run/docker.sock
-  commands:
-  - sleep 5 # give docker enough time to start
-  - docker --version
-  - docker ps
-  when:
-    branch: master
-  # privileged: true
+# - name: test
+#   image: docker:latest
+#   volumes:
+#   - name: dockersock
+#     path: /var/run/docker.sock
+#   commands:
+#   - sleep 5 # give docker enough time to start
+#   - docker --version
+#   - docker ps
+#   when:
+#     branch: master
+- name: build # 将程序打包成 Docker，放到私有 Docker 仓库中
+  image: plugins/docker
+  settings:
+    insecure: true # 因为使用的是私有仓库，没有 https 支持，所以要设置成 insecure 才能连接
+    dockerfile: Dockerfile # 使用 Dockerfile 的名字
+    username:
+      from_secret: lsy272631750 # 声明 username 从 Secret 为 account 的值中取出，在Drone的控制面板里可以设置，后面Q&A中介绍Secret
+    password:
+      from_secret: cptbtptp123
+    repo: lsy272631750/test # 打包后 Docker 镜像的名字
+    registry: https://hub.docker.com # 私有镜像仓库的地址
+    commands: 
+    - docker ps
+    when:
+      branch: master
 
 # services:
 # - name: docker
