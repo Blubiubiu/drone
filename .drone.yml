@@ -24,7 +24,7 @@ steps:
     password:
       from_secret: cptbtptp123
     # repo: lsy272631750/test # 打包后 Docker 镜像的名字
-    registry: https://hub.docker.com # 私有镜像仓库的地址
+    registry: https://hub.docker.com # 镜像仓库的地址
   commands: 
     - docker ps
     - docker build --rm -t test_docker .
