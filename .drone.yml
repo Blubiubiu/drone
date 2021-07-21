@@ -17,7 +17,7 @@ steps:
 - name: build # 将程序打包成 Docker，放到私有 Docker 仓库中
   image: plugins/docker
   settings:
-    insecure: true # 因为使用的是私有仓库，没有 https 支持，所以要设置成 insecure 才能连接
+    # insecure: true # 因为使用的是私有仓库，没有 https 支持，所以要设置成 insecure 才能连接
     dockerfile: Dockerfile # 使用 Dockerfile 的名字
     username:
       from_secret: lsy272631750 # 声明 username 从 Secret 为 account 的值中取出，在Drone的控制面板里可以设置，后面Q&A中介绍Secret
