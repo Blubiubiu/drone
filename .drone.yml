@@ -4,10 +4,10 @@ name: default
 
 steps:
 - name: test
-  image: docker:dind
+  image: docker:latest
   volumes:
   - name: dockersock
-    path: /var/run
+    path: /var/run/docker.sock
   commands:
   - sleep 5 # give docker enough time to start
   - docker --version
