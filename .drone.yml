@@ -38,6 +38,14 @@ steps:
   when:
     branch: master
 
+services:
+- name: docker
+  image: docker:latest
+  privileged: true
+  volumes:
+  - name: dockersock
+    path: /var/run
+
 # services:
 # - name: docker
 #   image: docker:dind
