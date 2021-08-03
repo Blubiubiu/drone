@@ -36,7 +36,8 @@ steps:
     - docker tag test_docker lsy272631750/test
     - docker push lsy272631750/test:test_docker
   volumes:
-    - /var/run/docker.sock:/var/run/docker.sock
+    - name: dockersock
+    path: /var/run/docker.sock
   when:
     branch: master
 
