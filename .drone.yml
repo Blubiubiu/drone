@@ -2,12 +2,12 @@ kind: pipeline
 name: default
 type: docker
 
-platform:
-  os: linux
-  arch: amd64
+# platform:
+#   os: linux
+#   arch: amd64
 
-clone:
-  disable: true
+# clone:
+#   disable: true
 
 steps:
 # - name: build-master
@@ -34,7 +34,7 @@ steps:
     # repo: lsy272631750/test # 打包后 Docker 镜像的名字
     registry: https://hub.docker.com # 镜像仓库的地址
   commands: 
-    # - docker version
+    - docker version
     # - dockerd 
     - docker ps
     - docker build --rm -t test_docker .
