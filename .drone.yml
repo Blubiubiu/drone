@@ -2,7 +2,7 @@ kind: pipeline
 type: docker
 name: default
 
-# steps:
+steps:
 # - name: build-master
 #   image: 'node:10.6.0'
 #   commands:
@@ -21,6 +21,8 @@ name: default
 #   - docker ps
 #   when:
 #     branch: master
+- name: clone
+  image: drone/git
 - name: build # 将程序打包成 Docker，放到私有 Docker 仓库中
   image: plugins/docker
   # volumes:
