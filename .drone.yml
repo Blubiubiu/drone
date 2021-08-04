@@ -19,10 +19,10 @@ trigger:
   - push
   - tag
 
-depends_on:
-- linux-amd64
-- linux-arm64
-- linux-arm
+# depends_on:
+# - linux-amd64
+# - linux-arm64
+# - linux-arm
 # kind: pipeline
 # type: docker
 # name: default
