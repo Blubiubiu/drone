@@ -30,7 +30,7 @@ steps:
 trigger:
   branch:
     exclude:
-      - master
+      - test
 # kind: pipeline
 # type: docker
 # name: default
