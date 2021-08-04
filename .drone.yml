@@ -3,6 +3,13 @@ type: docker
 name: default
 
 steps:
+- name: build-master
+  image: 'node:10.6.0'
+  commands:
+    - 'npm install'
+    - 'npm run build'
+  when:
+    branch: master
 # - name: test
 #   image: docker:latest
 #   volumes:
