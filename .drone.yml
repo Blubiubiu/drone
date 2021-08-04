@@ -10,11 +10,7 @@ steps:
 #     path: /var/run/docker.sock
 #   commands:
 #   - sleep 5 # give docker enough time to start
-#   - docker --version
-#   - docker ps
-#   when:
-#     branch: master
-- name: build # 将程序打包成 Docker，放到私有 Docker 仓库中
+- name: build
   image: plugins/docker
   volumes:
   - name: dockersock
