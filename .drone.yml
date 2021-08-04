@@ -1,23 +1,20 @@
+---
 kind: pipeline
-type: docker
-name: manifest
+name: default
 
 steps:
-- name: manifest
-  image: plugins/docker
-  settings:
-    auto_tag: "true"
-    ignore_missing: "true"
-    spec: docker/manifest.tmpl
-    username:
-      from_secret: docker_username
-    password:
-      from_secret: docker_password
+- name: test
+  image: docker:dind
+  volumes:
+  - name: dockersock
+    path: /var/run/docker.sock
+  commands:
+  - docker ps -a
 
-trigger:
-  event:
-  - push
-  - tag
+volumes:
+- name: dockersock
+  host:
+    path: /var/run/docker.sock
 
 # depends_on:
 # - linux-amd64
