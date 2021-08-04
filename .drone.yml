@@ -1,18 +1,51 @@
----
 kind: pipeline
-name: default
-
-steps:
-- name: test
-  image: docker:dind
+type: docker
+name: imc-admin
+- name: build & publisher
+  image: plugins/docker
   volumes:
-  - name: dockersock
+  - name: docker
     path: /var/run/docker.sock
-  commands:
-  - docker ps -a
-
+  settings:
+    registry: harbor.s.com
+    insecure: true
+    repo: harbor.s.com/spex/super
+    username: 
+      from_secret: drone_username
+    password: 
+      from_secret: drone_password
+    dockerfile: Dockerfile
+    auto_tag: true
+- name: ansible playbook
+  image: plugins/ansible:1
+  settings:
+    playbook: .ansible/playbook.yml
+    inventory: .ansible/inventory
+    private_key:
+      from_secret: docker_id_rsa
+- name: wechat notify
+  image: lizheming/drone-wechat
+  settings:
+    corpid: 
+      from_secret: plugin_corpid
+    corp_secret:
+      from_secret: plugin_corp_secret
+    agent_id: 
+      from_secret: plugin_agent_id
+    to_user: qyxxxx|qyyyyy|qy0zzzz
+    to_tag: ${DRONE_REPO_NAME}
+    msg_url: ${DRONE_BUILD_LINK}
+    safe: 1
+    btn_txt: more
+    title: ${DRONE_REPO_NAME}
+    message: >
+      {%if success %}
+        build {{build.number}} succeeded. Good job.
+      {% else %}
+        build {{build.number}} failed. Fix me please.
+      {% endif %}
 volumes:
-- name: dockersock
+- name: docker
   host:
     path: /var/run/docker.sock
 
