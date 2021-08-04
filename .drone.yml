@@ -1,119 +1,152 @@
+---
 kind: pipeline
+name: unit tests
 type: docker
-name: default
+
+clone:
+  disable: true
 
 steps:
-- name: build-master
-  image: 'node:10.6.0'
+- name: clone
+  image: alpine/git
   commands:
-    - 'npm install'
-    - 'npm run build'
-  when:
-    branch: master
-# - name: test
-#   image: docker:latest
+  - git init
+  - git config remote.origin.url $DRONE_REMOTE_URL
+  - git fetch origin +$DRONE_COMMIT_REF
+  - git fetch origin +refs/heads/${DRONE_COMMIT_BRANCH}
+  - git checkout $DRONE_COMMIT_SHA -b $DRONE_COMMIT_BRANCH
+  # Fetch upstream changes
+  - git fetch origin +refs/heads/master:refs/remotes/origin/master
+  # Merge master into local
+  - git merge $(git rev-parse origin/master)
+
+- name: run python tests
+  image: alpine
+  environment:
+    FOO: BAR
+  commands:
+    - echo run python tests
+
+trigger:
+  branch:
+    exclude:
+      - master
+# kind: pipeline
+# type: docker
+# name: default
+
+# steps:
+# - name: build-master
+#   image: 'node:10.6.0'
+#   commands:
+#     - 'npm install'
+#     - 'npm run build'
+#   when:
+#     branch: master
+# # - name: test
+# #   image: docker:latest
+# #   volumes:
+# #   - name: dockersock
+# #     path: /var/run/docker.sock
+# #   commands:
+# #   - sleep 5 # give docker enough time to start
+# #   - docker --version
+# #   - docker ps
+# #   when:
+# #     branch: master
+# - name: build # 将程序打包成 Docker，放到私有 Docker 仓库中
+#   image: plugins/docker
+#   # volumes:
+#   # - name: dockersock
+#   #   path: /var/run/docker.sock
+#   settings:
+#     # insecure: true # 因为使用的是私有仓库，没有 https 支持，所以要设置成 insecure 才能连接
+#     dockerfile: Dockerfile # 使用 Dockerfile 的名字
+#     username:
+#       from_secret: lsy272631750 # 声明 username 从 Secret 为 account 的值中取出，在Drone的控制面板里可以设置，后面Q&A中介绍Secret
+#     password:
+#       from_secret: cptbtptp123
+#     # repo: lsy272631750/test # 打包后 Docker 镜像的名字
+#     registry: https://hub.docker.com # 镜像仓库的地址
+#   commands: 
+#     # - docker version
+#     # - dockerd 
+#     - docker ps
+#     - docker build --rm -t test_docker .
+#     - docker tag test_docker lsy272631750/test
+#     - docker push lsy272631750/test:test_docker
 #   volumes:
 #   - name: dockersock
 #     path: /var/run/docker.sock
-#   commands:
-#   - sleep 5 # give docker enough time to start
-#   - docker --version
-#   - docker ps
 #   when:
 #     branch: master
-- name: build # 将程序打包成 Docker，放到私有 Docker 仓库中
-  image: plugins/docker
-  # volumes:
-  # - name: dockersock
-  #   path: /var/run/docker.sock
-  settings:
-    # insecure: true # 因为使用的是私有仓库，没有 https 支持，所以要设置成 insecure 才能连接
-    dockerfile: Dockerfile # 使用 Dockerfile 的名字
-    username:
-      from_secret: lsy272631750 # 声明 username 从 Secret 为 account 的值中取出，在Drone的控制面板里可以设置，后面Q&A中介绍Secret
-    password:
-      from_secret: cptbtptp123
-    # repo: lsy272631750/test # 打包后 Docker 镜像的名字
-    registry: https://hub.docker.com # 镜像仓库的地址
-  commands: 
-    # - docker version
-    # - dockerd 
-    - docker ps
-    - docker build --rm -t test_docker .
-    - docker tag test_docker lsy272631750/test
-    - docker push lsy272631750/test:test_docker
-  volumes:
-  - name: dockersock
-    path: /var/run/docker.sock
-  when:
-    branch: master
-volumes:
-- name: docker
-  host:
-    path: /var/run/docker.sock
-# services:
-# - name: docker
-#   image: docker:latest
-#   privileged: true
-#   volumes:
-#   - name: dockersock
-#     path: /var/run
-
-# services:
-# - name: docker
-#   image: docker:dind
-#   privileged: true
-#   volumes:
-#   - name: dockersock
-#     path: /var/run
-
 # volumes:
-# - name: dockersock
-#   temp: {}
-# steps:
-  # - name: build-master
-  #   image: 'node:10.6.0'
-  #   commands:
-  #     - 'npm install'
-  #     - 'npm run build'
-  #   when:
-  #     branch: master
-#   - name: public-online   
-#     image: plugins/docker
-#     volumes:
-#     - name: dockersock
-#       path: /var/run/docker.sock
-#     commands:
-#       - 'sleep 5'
-#       - 'docker --version'
-#       - 'docker login --username=lsy272631750 --password=cptbtptp123'
-#       - 'docker ps'
-#       - 'docker build --rm -t test_docker .'
-#       - 'docker tag test_docker lsy272631750/test'
-#       - 'docker push lsy272631750/test:test_docker'
-#     when: 
-#       branch: master  
+# - name: docker
+#   host:
+#     path: /var/run/docker.sock
+# # services:
+# # - name: docker
+# #   image: docker:latest
+# #   privileged: true
+# #   volumes:
+# #   - name: dockersock
+# #     path: /var/run
 
-# volumes:
-#   - name: dockersock
-#     host:
-#       path: /var/run/docker.sock
-# services:
-#   - name: docker
-#     image: docker:dind
-#     privileged: true
-#     volumes:
-#   - name: dockersock
-#     path: /var/run
-  # rancher-online:
-  #   image: peloton/drone-rancher
-  #   url: 'https://rancher.11vx.cn'
-  #   access_key: B24653F95507063ACE6A
-  #   secret_key: seyTtWvHaAUXjuyQBxH5BarRXZcZDaKvb9epCZgM
-  #   service: app/app1 
-  #   docker_image: 'registry.cn-beijing.aliyuncs.com/my_docker_test_01/docker_test_02'
-  #   start_first: false
-  #   confirm: true
-  #   timeout: 300 
-  #   when:
-  #     branch: master 
+# # services:
+# # - name: docker
+# #   image: docker:dind
+# #   privileged: true
+# #   volumes:
+# #   - name: dockersock
+# #     path: /var/run
+
+# # volumes:
+# # - name: dockersock
+# #   temp: {}
+# # steps:
+#   # - name: build-master
+#   #   image: 'node:10.6.0'
+#   #   commands:
+#   #     - 'npm install'
+#   #     - 'npm run build'
+#   #   when:
+#   #     branch: master
+# #   - name: public-online   
+# #     image: plugins/docker
+# #     volumes:
+# #     - name: dockersock
+# #       path: /var/run/docker.sock
+# #     commands:
+# #       - 'sleep 5'
+# #       - 'docker --version'
+# #       - 'docker login --username=lsy272631750 --password=cptbtptp123'
+# #       - 'docker ps'
+# #       - 'docker build --rm -t test_docker .'
+# #       - 'docker tag test_docker lsy272631750/test'
+# #       - 'docker push lsy272631750/test:test_docker'
+# #     when: 
+# #       branch: master  
+
+# # volumes:
+# #   - name: dockersock
+# #     host:
+# #       path: /var/run/docker.sock
+# # services:
+# #   - name: docker
+# #     image: docker:dind
+# #     privileged: true
+# #     volumes:
+# #   - name: dockersock
+# #     path: /var/run
+#   # rancher-online:
+#   #   image: peloton/drone-rancher
+#   #   url: 'https://rancher.11vx.cn'
+#   #   access_key: B24653F95507063ACE6A
+#   #   secret_key: seyTtWvHaAUXjuyQBxH5BarRXZcZDaKvb9epCZgM
+#   #   service: app/app1 
+#   #   docker_image: 'registry.cn-beijing.aliyuncs.com/my_docker_test_01/docker_test_02'
+#   #   start_first: false
+#   #   confirm: true
+#   #   timeout: 300 
+#   #   when:
+#   #     branch: master 
