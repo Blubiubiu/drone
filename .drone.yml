@@ -4,7 +4,7 @@ name: manifest
 
 steps:
 - name: manifest
-  image: plugins/manifest
+  image: plugins/docker
   settings:
     auto_tag: "true"
     ignore_missing: "true"
