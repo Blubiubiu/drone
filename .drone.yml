@@ -37,10 +37,10 @@ steps:
   when:
     branch: master
     
-volumes:
-- name: dockersock
-  host:
-    path: /var/run/docker.sock
+# volumes:
+# - name: dockersock
+#   host:
+#     path: /var/run/docker.sock
 
   rancher-online:
     image: peloton/drone-rancher
@@ -48,7 +48,7 @@ volumes:
     access_key: ADFB50C778525A36194A
     secret_key: 7f6B9wJM2DmbcjMVH3u8Zei25Mh6oKEgSUDn5Zza
     service: test/testApp 
-    docker_image: 'https://hub.docker.com/lsy272631750/test:test_docker'
+    docker_image: 'lsy272631750/test:test_docker'
     start_first: false
     confirm: true
     timeout: 300 
