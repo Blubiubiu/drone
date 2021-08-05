@@ -38,7 +38,7 @@ volumes:
 
 ---
 kind: pipeline
-name: default
+name: default1
 type: docker
 
 steps:    
