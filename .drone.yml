@@ -37,10 +37,10 @@ steps:
   when:
     branch: master
     
-# volumes:
-# - name: dockersock
-#   host:
-#     path: /var/run/docker.sock
+volumes:
+- name: dockersock
+  host:
+    path: /var/run/docker.sock
 
   rancher-online:
     image: peloton/drone-rancher
