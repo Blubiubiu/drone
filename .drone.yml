@@ -33,6 +33,7 @@ volumes:
 - name: dockersock
   host:
     path: /var/run/docker.sock
+    
 - name: rancher-build
   image: peloton/drone-rancher
   url: 'http://39.105.44.242:9904/v1'
