@@ -34,7 +34,7 @@ volumes:
   host:
     path: /var/run/docker.sock
 
-- name: rancher-online:
+- name: rancher-build
     image: peloton/drone-rancher
     url: 'http://39.105.44.242:9904/v1'
     access_key: ADFB50C778525A36194A
