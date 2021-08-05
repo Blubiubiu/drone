@@ -36,11 +36,6 @@ steps:
     - docker push lsy272631750/test:test_docker
   when:
     branch: master
-    
-volumes:
-- name: dockersock
-  host:
-    path: /var/run/docker.sock
 
   rancher-online:
     image: peloton/drone-rancher
@@ -54,6 +49,11 @@ volumes:
     timeout: 300 
     when:
       branch: master 
+
+volumes:
+- name: dockersock
+  host:
+    path: /var/run/docker.sock
 # volumes:
 # - name: docker
 #   host:
