@@ -48,6 +48,9 @@ steps:
     - docker push lsy272631750/test:test_docker
   when:
     branch: master
+volumes:
+- name: dockerconfig
+  temp: {}
 # volumes:
 # - name: docker
 #   host:
