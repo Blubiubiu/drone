@@ -25,7 +25,7 @@ steps:
   image: docker:dind
   volumes:
   - name: dockersock
-    path: /var/run
+    path: /var/run/docker.sock
   # volumes:
   # - name: dockersock
   #   path: /var/run/docker.sock
@@ -48,9 +48,11 @@ steps:
     - docker push lsy272631750/test:test_docker
   when:
     branch: master
+    
 volumes:
-- name: dockerconfig
-  temp: {}
+- name: dockersock
+  host:
+    path: /var/run/docker.sock
 # volumes:
 # - name: docker
 #   host:
