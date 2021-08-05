@@ -44,7 +44,7 @@ volumes:
 
   rancher-online:
     image: peloton/drone-rancher
-    url: 'http://http://39.105.44.242:9904/'
+    url: 'http://39.105.44.242:9904/'
     access_key: ADFB50C778525A36194A
     secret_key: 7f6B9wJM2DmbcjMVH3u8Zei25Mh6oKEgSUDn5Zza
     service: test/testApp 
