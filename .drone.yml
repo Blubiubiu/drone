@@ -50,7 +50,7 @@ volumes:
     service: test/testApp 
     docker_image: 'lsy272631750/test:test_docker'
     start_first: false
-    confirm: true
+    confirm: false
     timeout: 300 
     when:
       branch: master 
