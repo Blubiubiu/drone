@@ -2,15 +2,8 @@ kind: pipeline
 name: default
 type: docker
 
-# platform:
-#   os: linux
-#   arch: amd64
-
-# clone:
-#   disable: true
-
 steps:
-- name: build-master
+- name: npm-build
   image: 'node:10.6.0'
   commands:
     - 'npm install'
@@ -18,11 +11,11 @@ steps:
   when:
     branch: master
 
-- name: build
+- name: docker-build
   image: docker:dind
-  volumes:
-  - name: dockersock
-    path: /var/run/docker.sock
+  # volumes:
+  # - name: dockersock
+  #   path: /var/run/docker.sock
   settings:
     # insecure: true # 因为使用的是私有仓库，没有 https 支持，所以要设置成 insecure 才能连接
     dockerfile: Dockerfile # 使用 Dockerfile 的名字
@@ -42,7 +35,7 @@ steps:
     url: 'http://39.105.44.242:9904/v1'
     access_key: ADFB50C778525A36194A
     secret_key: 7f6B9wJM2DmbcjMVH3u8Zei25Mh6oKEgSUDn5Zza
-    service: test/testApp 
+    service: test/testApp
     docker_image: 'lsy272631750/test:test_docker'
     start_first: false
     confirm: false
