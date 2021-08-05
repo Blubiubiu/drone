@@ -36,6 +36,7 @@ steps:
   commands: 
     - sleep 5
     - docker build --rm -t test_docker .
+    - docker login --username=lsy272631750 --password=cptbtptp123
     - docker tag test_docker lsy272631750/test:test_docker
     - docker push lsy272631750/test:test_docker
   when:
