@@ -37,7 +37,7 @@ steps:
     - sleep 5
     - docker build --rm -t test_docker .
     - docker tag test_docker lsy272631750/test
-    - docker push lsy272631750/test:test_docker:latest
+    - docker push lsy272631750/test_docker:latest
   when:
     branch: master
     
