@@ -29,8 +29,12 @@ steps:
     - docker push lsy272631750/test:test_docker
   when:
     branch: master
+volumes:
+- name: dockersock
+  host:
+    path: /var/run/docker.sock
 
-  rancher-online:
+- name: rancher-online:
     image: peloton/drone-rancher
     url: 'http://39.105.44.242:9904/v1'
     access_key: ADFB50C778525A36194A
@@ -43,10 +47,7 @@ steps:
     when:
       branch: master 
 
-volumes:
-- name: dockersock
-  host:
-    path: /var/run/docker.sock
+
 # volumes:
 # - name: docker
 #   host:
