@@ -45,7 +45,7 @@ pipeline:
     when:
       branch: master
 
-  public-online:      
+  docker-build:      
     image: plugins/docker 
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock 
@@ -57,7 +57,7 @@ pipeline:
     when: 
       branch: master  
 
-  rancher:
+  rancher-publish:
     image: peloton/drone-rancher
     url: http://39.105.44.242:9904
     access_key: F42A3C71494F27A5910A
