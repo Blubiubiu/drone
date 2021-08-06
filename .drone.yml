@@ -31,10 +31,10 @@ steps:
   when:
     branch: master
 
-# volumes:
-# - name: dockersock
-#   host:
-#     path: /var/run/docker.sock
+volumes:
+- name: dockersock
+  host:
+    path: /var/run/docker.sock
 
 - name: rancher-build
   image: peloton/drone-rancher
@@ -49,19 +49,19 @@ steps:
   when:
     branch: master 
 
-services:
-- name: docker
-  image: docker:dind
-  privileged: true
-  volumes:
-  - name: dockersock
-    path: /var/run
+# services:
+# - name: docker
+#   image: docker:dind
+#   privileged: true
+#   volumes:
+#   - name: dockersock
+#     path: /var/run
 
-volumes:
-- name: dockersock
-  privileged: true
-  host:
-    path: /var/run/docker.sock
+# volumes:
+# - name: dockersock
+#   privileged: true
+#   host:
+#     path: /var/run/docker.sock
 
 # volumes:
 # - name: docker
