@@ -3,13 +3,13 @@ name: default
 type: docker
 
 steps:
-- name: npm-build
-  image: 'node:10.6.0'
-  commands:
-    - 'npm install'
-    - 'npm run build'
-  when:
-    branch: master
+# - name: npm-build
+#   image: 'node:10.6.0'
+#   commands:
+#     - 'npm install'
+#     - 'npm run build'
+#   when:
+#     branch: master
 
 - name: docker-build
   image: docker:dind
