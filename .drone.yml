@@ -59,18 +59,16 @@ steps:
   # start_first: false
   # confirm: false
   # timeout: 300
----
-pipeline:
-  rancher:
-    image: peloton/drone-rancher
-    url: http://39.105.44.242:9904
-    access_key: ADFB50C778525A36194A
-    secret_key: 7f6B9wJM2DmbcjMVH3u8Zei25Mh6oKEgSUDn5Zza
-    service: test/testApp
-    docker_image: lsy272631750/test:test_docker
-    start_first: false
-    confirm: false
-    timeout: 300
+- name: rancher
+  image: peloton/drone-rancher
+  url: http://39.105.44.242:9904
+  access_key: ADFB50C778525A36194A
+  secret_key: 7f6B9wJM2DmbcjMVH3u8Zei25Mh6oKEgSUDn5Zza
+  service: test/testApp
+  docker_image: lsy272631750/test:test_docker
+  start_first: false
+  confirm: false
+  timeout: 300
 # services:
 # - name: docker
 #   image: docker:dind
