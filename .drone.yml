@@ -13,10 +13,10 @@ steps:
 
 - name: docker-build
   image: docker:dind
-  volumes:
-  - name: dockersock
-    host:
-      path: /var/run/docker.sock
+  # volumes:
+  # - name: dockersock
+  #   host:
+  #     path: /var/run/docker.sock
   settings:
     # insecure: true # 因为使用的是私有仓库，没有 https 支持，所以要设置成 insecure 才能连接
     dockerfile: Dockerfile # 使用 Dockerfile 的名字
