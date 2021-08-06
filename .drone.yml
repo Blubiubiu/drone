@@ -38,12 +38,12 @@
 
 pipeline:
   npm-build:
-  image: 'node:10.6.0'
-  commands:
-    - 'npm install'
-    - 'npm run build'
-  when:
-    branch: master
+    image: 'node:10.6.0'
+    commands:
+      - 'npm install'
+      - 'npm run build'
+    when:
+      branch: master
 
   public-online:      
     image: plugins/docker 
