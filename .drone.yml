@@ -30,6 +30,19 @@ steps:
     - docker push lsy272631750/test:test_docker
   when:
     branch: master
+# volumes:
+# - name: dockersock
+#   host:
+#     path: /var/run/docker.sock
+
+services:
+- name: docker
+  image: docker:dind
+  privileged: true
+  volumes:
+  - name: dockersock
+    path: /var/run
+
 volumes:
 - name: dockersock
   host:
