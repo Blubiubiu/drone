@@ -1,6 +1,6 @@
 kind: pipeline
 name: default
-type: docker
+# type: docker
 
 steps:
 # - name: npm-build
