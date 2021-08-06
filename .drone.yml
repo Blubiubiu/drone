@@ -59,8 +59,7 @@ steps:
   # start_first: false
   # confirm: false
   # timeout: 300
----
-kind: pipeline
+pipeline:
   rancher:
     image: peloton/drone-rancher
     url: http://39.105.44.242:9904
