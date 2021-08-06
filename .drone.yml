@@ -59,7 +59,8 @@ services:
 
 volumes:
 - name: dockersock
-  temp: {}
+  host:
+    path: /var/run/docker.sock
 
 # volumes:
 # - name: docker
