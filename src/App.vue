@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    HELLO KITTY!!!
+    HELLO WORLD!!!
   </div>
 </template>
 
@@ -19,6 +19,6 @@ export default {
   text-align: center;
   margin-top: 60px;
   font-size: 60px;
-  color: pink;
+  color: #2c3e50;
 }
 </style>
