@@ -49,7 +49,7 @@ steps:
 #   timeout: 300 
 #   when:
 #     branch: master 
-rancher:
+- name: rancher
   image: peloton/drone-rancher
   url: http://39.105.44.242:9904
   access_key: ADFB50C778525A36194A
