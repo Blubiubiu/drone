@@ -37,20 +37,20 @@
 #     path: /var/run/docker.sock
 
 pipeline:
-  npm-build:
-    image: 'node:10.6.0'
-    commands:
-      - 'npm install'
-      - 'npm run build'
-    when:
-      branch: master
+  # npm-build:
+  #   image: 'node:10.6.0'
+  #   commands:
+  #     - 'npm install'
+  #     - 'npm run build'
+  #   when:
+  #     branch: master
 
   public-online:      
     image: plugins/docker 
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock 
     commands:
-      - docker login --username=hesouli -p Cptbtptp123
+      - docker login --username=lsy272631750 --password=cptbtptp123
       - docker build --rm -t test_docker .
       - docker tag test_docker lsy272631750/test:test_docker
       - docker push lsy272631750/test:test_docker
