@@ -1,9 +1,43 @@
-kind: pipeline
-name: default
-type: docker
+# kind: pipeline
+# name: default
+# type: docker
 
-steps:
-- name: npm-build
+# steps:
+# - name: npm-build
+#   image: 'node:10.6.0'
+#   commands:
+#     - 'npm install'
+#     - 'npm run build'
+#   when:
+#     branch: master
+
+# - name: docker-build
+#   image: docker:dind
+#   volumes:
+#   - name: dockersock
+#     path: /var/run/docker.sock
+#   settings:
+#     # insecure: true # 因为使用的是私有仓库，没有 https 支持，所以要设置成 insecure 才能连接
+#     dockerfile: Dockerfile # 使用 Dockerfile 的名字
+#     # repo: lsy272631750/test # 打包后 Docker 镜像的名字
+#     registry: https://hub.docker.com # 镜像仓库的地址
+#   commands: 
+#     - sleep 5
+#     - docker ps
+#     # - docker build --rm -t test_docker .
+#     # - docker login --username=lsy272631750 --password=cptbtptp123
+#     # - docker tag test_docker lsy272631750/test:test_docker
+#     # - docker push lsy272631750/test:test_docker
+#   when:
+#     branch: master
+
+# volumes:
+# - name: dockersock
+#   host:
+#     path: /var/run/docker.sock
+
+pipeline:
+  npm-build:
   image: 'node:10.6.0'
   commands:
     - 'npm install'
@@ -11,32 +45,18 @@ steps:
   when:
     branch: master
 
-- name: docker-build
-  image: docker:dind
-  volumes:
-  - name: dockersock
-    path: /var/run/docker.sock
-  settings:
-    # insecure: true # 因为使用的是私有仓库，没有 https 支持，所以要设置成 insecure 才能连接
-    dockerfile: Dockerfile # 使用 Dockerfile 的名字
-    # repo: lsy272631750/test # 打包后 Docker 镜像的名字
-    registry: https://hub.docker.com # 镜像仓库的地址
-  commands: 
-    - sleep 5
-    - docker ps
-    # - docker build --rm -t test_docker .
-    # - docker login --username=lsy272631750 --password=cptbtptp123
-    # - docker tag test_docker lsy272631750/test:test_docker
-    # - docker push lsy272631750/test:test_docker
-  when:
-    branch: master
+  public-online:      
+    image: plugins/docker 
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock 
+    commands:
+      - docker login --username=hesouli -p Cptbtptp123
+      - docker build --rm -t test_docker .
+      - docker tag test_docker lsy272631750/test:test_docker
+      - docker push lsy272631750/test:test_docker
+    when: 
+      branch: master  
 
-volumes:
-- name: dockersock
-  host:
-    path: /var/run/docker.sock
-
-pipeline:
   rancher:
     image: peloton/drone-rancher
     url: http://39.105.44.242:9904
