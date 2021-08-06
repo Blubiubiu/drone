@@ -3,7 +3,6 @@ name: default
 type: docker
 
 steps:
-  
 - name: npm-build
   image: 'node:10.6.0'
   commands:
@@ -48,6 +47,8 @@ pipeline:
     start_first: false
     confirm: false
     timeout: 300
+    when: 
+      branch: master
 # services:
 # - name: docker
 #   image: docker:dind
