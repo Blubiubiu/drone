@@ -38,9 +38,10 @@ steps:
 
 - name: rancher-build
   image: peloton/drone-rancher
-  url: 'http://39.105.44.242:9904/v1'
-  key: ADFB50C778525A36194A
-  secret: 7f6B9wJM2DmbcjMVH3u8Zei25Mh6oKEgSUDn5Zza
+  url: 'http://39.105.44.242:9904'
+  # key: ADFB50C778525A36194A
+  # secret: 7f6B9wJM2DmbcjMVH3u8Zei25Mh6oKEgSUDn5Zza
+  secrets: [ ADFB50C778525A36194A, 7f6B9wJM2DmbcjMVH3u8Zei25Mh6oKEgSUDn5Zza ]
   service: test/testApp
   docker_image: 'lsy272631750/test:test_docker'
   start_first: false
