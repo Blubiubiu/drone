@@ -59,6 +59,7 @@ services:
 
 volumes:
 - name: dockersock
+  privileged: true
   host:
     path: /var/run/docker.sock
 
