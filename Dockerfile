@@ -5,6 +5,6 @@ WORKDIR /usr/share/nginx/html
 # RUN rm -rf *
 # RUN mkdir gray
 # COPY dist gray
-COPY dist ./
+# COPY dist ./
 EXPOSE 9905
 CMD ["nginx", "-g", "daemon off;"]
