@@ -1,8 +1,8 @@
-# kind: pipeline
-# name: default
-# type: docker
+kind: pipeline
+name: default
+type: docker
 
-# steps:
+steps:
 # - name: npm-build
 #   image: 'node:10.6.0'
 #   commands:
@@ -59,6 +59,7 @@
   # start_first: false
   # confirm: false
   # timeout: 300
+---
 pipeline:
   rancher:
     image: peloton/drone-rancher
