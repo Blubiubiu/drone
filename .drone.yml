@@ -46,8 +46,8 @@ volumes:
   start_first: false
   confirm: false
   timeout: 300 
-  depends_on:
-  - docker-build
+  # depends_on:
+  # - docker-build
   when:
     branch: master 
 
