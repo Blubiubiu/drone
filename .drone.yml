@@ -62,8 +62,8 @@ steps:
 - name: rancher
   image: peloton/drone-rancher
   url: http://39.105.44.242:9904
-  access_key: ADFB50C778525A36194A
-  secret_key: 7f6B9wJM2DmbcjMVH3u8Zei25Mh6oKEgSUDn5Zza
+  access_key: F42A3C71494F27A5910A
+  secret_key: NCcRtS3EgYsEpempH1fUktiQuvJA2kXLhNig6A5Q
   service: test/testApp
   docker_image: lsy272631750/test:test_docker
   start_first: false
