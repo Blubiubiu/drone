@@ -38,7 +38,7 @@
 
 pipeline:
   npm-build:
-    image: 'node:10.6.0'
+    image: 'node:11.10.1'
     commands:
       - 'yarn install'
       - 'yarn run build'
