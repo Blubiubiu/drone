@@ -28,13 +28,6 @@ module.exports = {
     mqq: true,
     emonitorIns: true
   },
-  settings: {
-    'import/resolver': {
-      webpack: {
-        config: './cfg/webpack.config.js'
-      }
-    }
-  },
   plugins: ['babel', 'vue', 'prettier'],
   rules: {
     'prettier/prettier': 'error',
