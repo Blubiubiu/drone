@@ -41,7 +41,7 @@ pipeline:
     image: 'node:11.10.1'
     commands:
       - 'yarn install'
-      - 'yarn run build'
+      - 'npm run build'
     when:
       branch: master
 
