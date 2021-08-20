@@ -1,5 +1,5 @@
 <template>
-    <div id="app">HELLO WORLD!!!!!!</div>
+    <div id="app">HELLO WORLD!!!{{ a }}</div>
 </template>
 
 <script>
