@@ -1,5 +1,5 @@
 <template>
-    <div id="app">HELLO WORLD!!!</div>
+    <div id="app">HELLO KITTY!!!</div>
 </template>
 
 <script>
@@ -14,6 +14,6 @@ export default {
     text-align: center;
     margin-top: 60px;
     font-size: 60px;
-    color: #2c3e50;
+    color: pink;
 }
 </style>
